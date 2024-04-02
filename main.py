@@ -18,7 +18,7 @@ if __name__ == '__main__':
         df = None
         cnt = 0
         for link in links:
-            if cnt == 4:
+            if cnt == 15:
                 break
             cnt += 1
             with NoteBookCheck() as bot:

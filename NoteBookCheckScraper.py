@@ -33,7 +33,7 @@ class NoteBookCheck(webdriver.Chrome):
     def __init__(self):
         super().__init__()
         # Properties.
-        self.product_name = None
+        self.product_name = ""
         self.basic_details = {}
         self.chassis_details = {}
         self.features_details = {}
@@ -71,11 +71,13 @@ class NoteBookCheck(webdriver.Chrome):
     def scrapName(self):
         try:
             product_name = self.find_element(By.CSS_SELECTOR, "h1").text
-            self.product_name = product_name.split(" review")[0]
+            self.product_name = product_name.split("Review")[0]
             print(f"Product Name is {self.product_name}")
         except:
             print("No Product Name Found.")
             pass
+
+        self.mobile_data['Product_name'] = self.product_name
 
     # Working Perfectly Fine...
     def scrapSpecs(self):
@@ -245,7 +247,7 @@ class NoteBookCheck(webdriver.Chrome):
         for key in self.dict_keys:
             if key == "Product_name":
                 self.mobile_data[key] = self.product_name
-            if key in self.basic_details.keys():
+            elif key in self.basic_details.keys():
                 self.mobile_data[key] = self.basic_details[key]
             elif key in self.chassis_details.keys():
                 self.mobile_data[key] = self.chassis_details[key]
